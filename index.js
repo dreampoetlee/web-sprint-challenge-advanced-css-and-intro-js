@@ -265,9 +265,11 @@ console.log(get20s(artists));
  
  For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/){
-   /*Your Code Here*/
+function removeArtist(arr, i) {
+  arr.splice(i, 1);
+  return arr.length;
 }
+console.log(removeArtist(artists, 3));
    
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -286,9 +288,18 @@ Use addArtist to do the following:
 
 Example: addArtist(artists) should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
+function addArtist(arr) {
+  arr.push({
+    id: 20,
+    name: 'Daemon Sadi',
+    years: '1900 - 2022',
+    genre: 'Black Jeweled Warlord Prince',
+    nationality: 'Dhemlan',
+    bio: 'Daemon Sadi (pronounced "Day-mon"), born Saetan Daemon SaDiablo, is the son of Tersa, a broken Black Widow, and Saetan SaDiablo, High Lord of Hell. He is a Black Jeweled Warlord Prince, his Birthright Jewel being Red.'
+  });
+  return arr;
+}
+console.log(addArtist(artists));
 
   
 
@@ -299,10 +310,12 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/){
-  /*Your Code Here*/
+function lotsOfArt(arr) {
+  return arr
+    .filter((artist) => artist.paintings > 100)
+    .map((artist) => artist.name);
 }
-
+console.log(lotsOfArt(artists));
 
 
 
