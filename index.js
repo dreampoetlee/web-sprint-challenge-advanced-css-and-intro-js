@@ -208,15 +208,18 @@ Practice accessing data above by console.log-ing following items:
 (no functions needed) */
 
 //(1) Name of the first artist (0th index) in the array
+console.log(artists[0].name);
 
-
-//(2) Bio of the third artist (2nd index) in the array 
+//(2) Bio of the third artist (2nd index) in the array
+console.log(artists[2].bio);
 
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
+artists[8].name = 'Vincent Van Gogh';
+console.log(artists[8].name);
 
 
 
@@ -228,11 +231,10 @@ There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is current
  
  Example, if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
 
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
-}  
-
-
+function getArtistByIndex(arr, i) {
+  return `the artist at index ${i} is ${arr[i].name}`;
+}
+console.log(getArtistByIndex(artists, 1));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use get20s to do the following: 
@@ -242,10 +244,16 @@ Use get20s to do the following:
 Example born in 1901 and died in 1959 - included -- born in 1889 and died in 1925 not included
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/*Your Code Here*/){
-  /*Your Code Here*/
+function get20s(arr) {
+  let age = [];
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i].years >= '1900' && arr[i].years <= '2000') {
+      age.push(arr[i].name);
+    }
+  }
+  return age;
 }
-
+console.log(get20s(artists));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -257,9 +265,11 @@ function get20s(/*Your Code Here*/){
  
  For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/){
-   /*Your Code Here*/
+function removeArtist(arr, i) {
+  arr.splice(i, 1);
+  return arr.length;
 }
+console.log(removeArtist(artists, 3));
    
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -278,9 +288,18 @@ Use addArtist to do the following:
 
 Example: addArtist(artists) should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
+function addArtist(arr) {
+  arr.push({
+    id: 20,
+    name: 'Daemon Sadi',
+    years: '1900 - 2022',
+    genre: 'Black Jeweled Warlord Prince',
+    nationality: 'Dhemlan',
+    bio: 'Daemon Sadi (pronounced "Day-mon"), born Saetan Daemon SaDiablo, is the son of Tersa, a broken Black Widow, and Saetan SaDiablo, High Lord of Hell. He is a Black Jeweled Warlord Prince, his Birthright Jewel being Red.'
+  });
+  return arr;
+}
+console.log(addArtist(artists));
 
   
 
@@ -291,10 +310,12 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/){
-  /*Your Code Here*/
+function lotsOfArt(arr) {
+  return arr
+    .filter((artist) => artist.paintings > 100)
+    .map((artist) => artist.name);
 }
-
+console.log(lotsOfArt(artists));
 
 
 
@@ -319,22 +340,34 @@ Create a function called `getHTML()` that takes the parameter `data` and uses a 
 The function should console.log 50 chunks of HTML code that match the structure above. 
 
 ‼️ You do **NOT** need to get these to display on your page, but you can copy and paste the result into your HTML file if you'd like to see what that would look like. */
+function getHTML(data) {
+  for (const key in data) {
+    console.log(`
+      <div id='artist'>
+        <div class='image'>
+          <img src=''/>
+        </div>
 
-function getHTML(/* Code here */){
+        <div class='name'>
+          <a href='${data[key].wikipedia}'>${data[key].name}</a>
+        </div>
 
-    /* Code here */
-
+        <div class='bio'>
+          ${data[key].bio}
+        </div>
+      </div>
+    `)
   }
-
+}
+getHTML(artists);
 
 /* 💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪
 Create a function called `randomize` that takes a data array as an argument and returns a the same array in a randomized order. */
 
-function randomize(/* Code here */){
-
-    /* Code here */
-
-  }
+function randomize(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+console.log(randomize(artists));
 
 
  /* 💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪
